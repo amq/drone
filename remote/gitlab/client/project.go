@@ -80,8 +80,8 @@ func (c *Client) Project(id string) (*Project, error) {
 }
 
 func (c *Client) RepoRawFileRef(id, ref, filepath string) ([]byte, error) {
+	var fileRef FileRef
 	url, opaque := c.ResourceUrl(
-		var fileRef FileRef
 		repoUrlRawFileRef,
 		QMap{
 			":id":       id,
