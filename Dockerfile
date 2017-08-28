@@ -12,9 +12,9 @@ ENV XDG_CACHE_HOME /var/lib/drone
 COPY . /go/src/github.com/drone/drone
 RUN git clone -b v${DRONE_UI_BUILD_NUMBER} https://github.com/drone/drone-ui github.com/drone/drone-ui \
     && go get -d github.com/drone/drone-ui/dist \
-    && go build -o release/drone github.com/drone/drone/drone
-COPY release/drone /drone
-RUN rm -rf /go/src
+    && go build -o release/drone github.com/drone/drone/drone \
+    && mv release/drone /drone \
+    && rm -rf /go/src
 
 ENTRYPOINT ["/drone"]
 CMD ["server"]
